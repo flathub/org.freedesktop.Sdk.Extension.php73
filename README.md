@@ -4,7 +4,7 @@ This extension adds PHP support to Flatpak.
 
 PHP installs to `/usr/lib/sdk/php73` inside the sandbox.
 
-Example VSCode Configuration
+Example Visual Studio Code Configuration
 
 ```json
 "php.validate.executablePath": "/usr/lib/sdk/php73/bin/php",
@@ -17,7 +17,8 @@ Includes
 * [composer](https://github.com/composer/composer) (1.8.6)
 * [xdebug](https://xdebug.org/) (2.7.2)
 
-You can place your own ini files in `~/.config/php/7.3/ini/`
+You can use your own ini files in the config folder for each Flatpak. e.g. for Visual Studio Code
+`~/.var/app/com.visualstudio.code/config/php/7.3/ini` or `/var/config/php/7.3/ini` from a sandboxed shell.
 
 #### Troubleshooting
 `/usr/bin/env: ‘php’: No such file or directory`

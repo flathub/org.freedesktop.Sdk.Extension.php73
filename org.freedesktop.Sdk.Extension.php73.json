@@ -98,7 +98,7 @@
 				"--enable-xsl",
 				"--enable-zlib",
 				"--with-argon2",
-				"--with-config-file-scan-dir=/usr/lib/sdk/php73/lib/ini:${HOME}/.config/php/7.3/ini",
+				"--with-config-file-scan-dir=/usr/lib/sdk/php73/lib/ini:/var/config/php/7.3/ini",
 				"--with-curl",
 				"--with-gd",
 				"--with-libzip",
@@ -138,9 +138,10 @@
 					"path":"xdebug.ini"
 				},
 				{
-					"type": "script",
-					"dest-filename": "autogen.sh",
-					"commands": [ "${FLATPAK_DEST}/bin/phpize" ]
+					"type": "shell",
+					"commands": [
+						"${FLATPAK_DEST}/bin/phpize"
+					]
 				}
 			]
 		},
