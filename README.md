@@ -77,3 +77,7 @@ zlib
 [Zend Modules]
 Xdebug
 ```
+#### Build
+```bash
+flatpak-builder --repo repo _build org.freedesktop.Sdk.Extension.php73.json --force-clean
+```
