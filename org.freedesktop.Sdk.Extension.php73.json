@@ -119,11 +119,11 @@
 		},
 		{
 			"name":"xdebug",
-			"buildsystem":"simple",
-			"build-commands": [
-				"${FLATPAK_DEST}/bin/phpize",
-				"./configure --with-php-config=${FLATPAK_DEST}/bin/php-config",
-				"make -j$FLATPAK_BUILDER_N_JOBS",
+			"buildsystem":"autotools",
+			"config-opts": [
+				"--with-php-config=/usr/lib/sdk/php73/bin/php-config"
+			],
+			"post-install": [
 				"install -Dm755 modules/xdebug.so ${FLATPAK_DEST}/lib/php/extensions/no-debug-non-zts-20180731/xdebug.so",
 				"install -Dm644 xdebug.ini ${FLATPAK_DEST}/lib/ini/xdebug.ini"
 				],
@@ -136,6 +136,11 @@
 				{
 					"type":"file",
 					"path":"xdebug.ini"
+				},
+				{
+					"type": "script",
+					"dest-filename": "autogen.sh",
+					"commands": [ "${FLATPAK_DEST}/bin/phpize" ]
 				}
 			]
 		},
