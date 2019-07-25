@@ -98,7 +98,7 @@
 				"--enable-xsl",
 				"--enable-zlib",
 				"--with-argon2",
-				"--with-config-file-scan-dir=${FLATPAK_DEST}/lib/etc:/app/etc/php:/var/config/php/7.3/ini",
+				"--with-config-file-scan-dir=${FLATPAK_DEST}/etc/php:/app/etc/php:/var/config/php/7.3/ini",
 				"--with-curl",
 				"--with-gd",
 				"--with-libzip",
@@ -125,7 +125,7 @@
 			],
 			"post-install": [
 				"install -Dm755 modules/xdebug.so ${FLATPAK_DEST}/lib/php/extensions/no-debug-non-zts-20180731/xdebug.so",
-				"install -Dm644 xdebug.ini ${FLATPAK_DEST}/lib/etc/xdebug.ini"
+				"install -Dm644 xdebug.ini ${FLATPAK_DEST}/etc/php/xdebug.ini"
 			],
 			"sources":[
 				{
