@@ -159,7 +159,7 @@
 			"buildsystem": "simple",
 			"build-commands": [
 				"install -Dm755 composer.phar ${FLATPAK_DEST}/bin/composer",
-				"install -Dm644 LICENSE ${FLATPAK_DEST}/share/licenses/composer/LICENSE"
+				"install -Dm644 LICENSE ${FLATPAK_DEST}/share/licenses/composer/LICENSEw"
 			],
 			"sources": [
 				{
@@ -169,7 +169,7 @@
 				},
 				{
 					"type": "git",
-					"url": "https://github.com/composer/composer/",
+					"url": "https://github.com/composer/composer.git",
 					"tag": "1.8.6"
 				}
 			]
