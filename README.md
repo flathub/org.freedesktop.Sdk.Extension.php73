@@ -72,6 +72,7 @@ xdebug
 xml
 xmlreader
 xmlwriter
+zip
 zlib
 
 [Zend Modules]

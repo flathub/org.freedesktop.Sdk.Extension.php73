@@ -11,13 +11,15 @@
 	"cleanup": [
 		"/share/info",
 		"/share/man",
+		"/include",
 		"*.a",
 		"*.la"
 	],
 	"build-options": {
 		"no-debuginfo": true,
 		"strip": true,
-		"prefix": "/usr/lib/sdk/php73"
+		"prefix": "/usr/lib/sdk/php73",
+		"append-pkg-config-path": "/usr/lib/sdk/php73/lib/pkgconfig"
 	},
 	"modules": [
 		{
@@ -29,6 +31,9 @@
 					"url": "https://libzip.org/download/libzip-1.5.2.tar.gz",
 					"sha256": "be694a4abb2ffe5ec02074146757c8b56084dbcebf329123c84b205417435e15"
 				}
+			],
+			"post-install": [
+				"install -Dm644 LICENSE ${FLATPAK_DEST}/share/licenses/libzip/LICENSE"
 			]
 		},
 		{
@@ -96,7 +101,9 @@
 				"--enable-xmlrpc",
 				"--enable-xmlwriter",
 				"--enable-xsl",
+				"--enable-zip",
 				"--enable-zlib",
+				"--mandir=${FLATPAK_DEST}/share/man",
 				"--with-argon2",
 				"--with-config-file-scan-dir=${FLATPAK_DEST}/etc/php:/app/etc/php:/var/config/php/7.3/ini",
 				"--with-curl",
@@ -107,7 +114,8 @@
 				"--with-zlib"
 			],
 			"post-install": [
-				"install -Dm644 php.ini-development ${FLATPAK_DEST}/lib/php.ini"
+				"install -Dm644 php.ini-development ${FLATPAK_DEST}/lib/php.ini",
+				"install -Dm644 LICENSE ${FLATPAK_DEST}/share/licenses/php/LICENSE"
 			],
 			"sources": [
 				{
@@ -125,7 +133,8 @@
 			],
 			"post-install": [
 				"install -Dm755 modules/xdebug.so ${FLATPAK_DEST}/lib/php/extensions/no-debug-non-zts-20180731/xdebug.so",
-				"install -Dm644 xdebug.ini ${FLATPAK_DEST}/etc/php/xdebug.ini"
+				"install -Dm644 xdebug.ini ${FLATPAK_DEST}/etc/php/xdebug.ini",
+				"install -Dm644 LICENSE ${FLATPAK_DEST}/share/licenses/xdebug/LICENSE"
 			],
 			"sources":[
 				{
@@ -149,13 +158,19 @@
 			"name": "composer",
 			"buildsystem": "simple",
 			"build-commands": [
-				"install -Dm755 composer.phar ${FLATPAK_DEST}/bin/composer"
+				"install -Dm755 composer.phar ${FLATPAK_DEST}/bin/composer",
+				"install -Dm644 LICENSE ${FLATPAK_DEST}/share/licenses/composer/LICENSE"
 			],
 			"sources": [
 				{
 					"type": "file",
 					"url": "https://getcomposer.org/download/1.8.6/composer.phar",
 					"sha256": "b66f9b53db72c5117408defe8a1e00515fe749e97ce1b0ae8bdaa6a5a43dd542"
+				},
+				{
+					"type": "git",
+					"url": "https://github.com/composer/composer/",
+					"tag": "1.8.6"
 				}
 			]
 		},
@@ -178,8 +193,7 @@
 			"name":"scripts",
 			"buildsystem":"simple",
 			"build-commands":[
-				"install -Dm755 enable.sh ${FLATPAK_DEST}/enable.sh",
-				"install -Dm644 LICENSE.txt ${FLATPAK_DEST}/LICENSE.txt"
+				"install -Dm755 enable.sh ${FLATPAK_DEST}/enable.sh"
 			],
 			"sources":[
 				{
@@ -188,10 +202,6 @@
 				        "export PATH=$PATH:/usr/lib/sdk/php73/bin"
 				    ],
 				    "dest-filename":"enable.sh"
-				},
-				{
-				    "type":"file",
-				    "path":"LICENSE.txt"
 				}
 			]
 		}
