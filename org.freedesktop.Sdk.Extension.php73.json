@@ -159,7 +159,7 @@
 			"buildsystem": "simple",
 			"build-commands": [
 				"install -Dm755 composer.phar ${FLATPAK_DEST}/bin/composer",
-				"install -Dm644 LICENSE ${FLATPAK_DEST}/share/licenses/composer/LICENSEw"
+				"install -Dm644 LICENSE ${FLATPAK_DEST}/share/licenses/composer/LICENSE"
 			],
 			"sources": [
 				{
