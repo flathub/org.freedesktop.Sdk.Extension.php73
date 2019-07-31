@@ -11,13 +11,15 @@
 	"cleanup": [
 		"/share/info",
 		"/share/man",
+		"/include",
 		"*.a",
 		"*.la"
 	],
 	"build-options": {
 		"no-debuginfo": true,
 		"strip": true,
-		"prefix": "/usr/lib/sdk/php73"
+		"prefix": "/usr/lib/sdk/php73",
+		"append-pkg-config-path": "/usr/lib/sdk/php73/lib/pkgconfig"
 	},
 	"modules": [
 		{
@@ -29,21 +31,16 @@
 					"url": "https://libzip.org/download/libzip-1.5.2.tar.gz",
 					"sha256": "be694a4abb2ffe5ec02074146757c8b56084dbcebf329123c84b205417435e15"
 				}
+			],
+			"post-install": [
+				"install -Dm644 LICENSE ${FLATPAK_DEST}/share/licenses/libzip/LICENSE"
 			]
 		},
 		{
 			"name": "php",
 			"buildsystem": "autotools",
 			"config-opts": [
-				"--enable-re2c-cgoto",
-				"--with-tsrm-pthreads",
-				"--enable-phpdbg",
 				"--disable-cgi",
-				"--with-argon2",
-				"--enable-exif",
-				"--enable-ftp",
-				"--enable-mbstring",
-				"--enable-intl",
 				"--enable-calendar",
 				"--enable-dba=shared",
 				"--enable-bcmath",
@@ -54,8 +51,10 @@
 				"--enable-dba",
 				"--enable-dom",
 				"--enable-enchant",
+				"--enable-exif",
 				"--enable-fileinfo",
 				"--enable-filter",
+				"--enable-ftp",
 				"--enable-gd",
 				"--enable-gettext",
 				"--enable-gmp",
@@ -66,6 +65,8 @@
 				"--enable-json",
 				"--enable-ldap",
 				"--enable-libxml",
+				"--enable-mbstring",
+				"--enable-mysqli",
 				"--enable-mysqlnd",
 				"--enable-opcache",
 				"--enable-openssl",
@@ -76,8 +77,10 @@
 				"--enable-pdo_pgsql",
 				"--enable-pdo_sqlite",
 				"--enable-phar",
+				"--enable-phpdbg",
 				"--enable-posix",
 				"--enable-pspell",
+				"--enable-re2c-cgoto",
 				"--enable-readline",
 				"--enable-recode",
 				"--enable-reflection",
@@ -98,19 +101,56 @@
 				"--enable-xmlrpc",
 				"--enable-xmlwriter",
 				"--enable-xsl",
-				"--with-libzip",
+				"--enable-zip",
 				"--enable-zlib",
-				"--with-zlib",
-				"--with-openssl"
+				"--mandir=${FLATPAK_DEST}/share/man",
+				"--with-argon2",
+				"--with-config-file-scan-dir=${FLATPAK_DEST}/etc/php:/app/etc/php:/var/config/php/7.3/ini",
+				"--with-curl",
+				"--with-gd",
+				"--with-libzip",
+				"--with-openssl",
+				"--with-tsrm-pthreads",
+				"--with-zlib"
 			],
 			"post-install": [
-				"install -Dm644 php.ini-development ${FLATPAK_DEST}/lib/php.ini"
+				"install -Dm644 php.ini-development ${FLATPAK_DEST}/lib/php.ini",
+				"install -Dm644 LICENSE ${FLATPAK_DEST}/share/licenses/php/LICENSE"
 			],
 			"sources": [
 				{
 					"type": "archive",
-					"url": "https://www.php.net/distributions/php-7.3.5.tar.gz",
-					"sha256": "c953749b7f3310a3a74f920ef698f6d1c04636d11656ac9ffb3ab10d34e30e1e"
+					"url": "https://www.php.net/distributions/php-7.3.7.tar.gz",
+					"sha256": "4230bbc862df712b013369de94b131eddea1e5e946a8c5e286b82d441c313328"
+				}
+			]
+		},
+		{
+			"name":"xdebug",
+			"buildsystem":"autotools",
+			"config-opts": [
+				"--with-php-config=/usr/lib/sdk/php73/bin/php-config"
+			],
+			"post-install": [
+				"install -Dm755 modules/xdebug.so ${FLATPAK_DEST}/lib/php/extensions/no-debug-non-zts-20180731/xdebug.so",
+				"install -Dm644 xdebug.ini ${FLATPAK_DEST}/etc/php/xdebug.ini",
+				"install -Dm644 LICENSE ${FLATPAK_DEST}/share/licenses/xdebug/LICENSE"
+			],
+			"sources":[
+				{
+					"type":"archive",
+					"url":"http://xdebug.org/files/xdebug-2.7.2.tgz",
+					"sha256":"b0f3283aa185c23fcd0137c3aaa58554d330995ef7a3421e983e8d018b05a4a6"
+				},
+				{
+					"type":"file",
+					"path":"xdebug.ini"
+				},
+				{
+					"type": "shell",
+					"commands": [
+						"${FLATPAK_DEST}/bin/phpize"
+					]
 				}
 			]
 		},
@@ -118,14 +158,19 @@
 			"name": "composer",
 			"buildsystem": "simple",
 			"build-commands": [
-				"cp composer.phar /usr/lib/sdk/php73/bin/composer",
-				"chmod 755 /usr/lib/sdk/php73/bin/composer"
+				"install -Dm755 composer.phar ${FLATPAK_DEST}/bin/composer",
+				"install -Dm644 LICENSE ${FLATPAK_DEST}/share/licenses/composer/LICENSE"
 			],
 			"sources": [
 				{
 					"type": "file",
 					"url": "https://getcomposer.org/download/1.8.6/composer.phar",
 					"sha256": "b66f9b53db72c5117408defe8a1e00515fe749e97ce1b0ae8bdaa6a5a43dd542"
+				},
+				{
+					"type": "git",
+					"url": "https://github.com/composer/composer.git",
+					"tag": "1.8.6"
 				}
 			]
 		},
@@ -143,6 +188,22 @@
 			                "path": "org.freedesktop.Sdk.Extension.php73.appdata.xml"
 		                }
 		        ]
+		},
+		{
+			"name":"scripts",
+			"buildsystem":"simple",
+			"build-commands":[
+				"install -Dm755 enable.sh ${FLATPAK_DEST}/enable.sh"
+			],
+			"sources":[
+				{
+				    "type":"script",
+				    "commands":[
+				        "export PATH=$PATH:/usr/lib/sdk/php73/bin"
+				    ],
+				    "dest-filename":"enable.sh"
+				}
+			]
 		}
 	]
 }
