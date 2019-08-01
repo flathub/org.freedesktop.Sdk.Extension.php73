@@ -120,8 +120,8 @@
 			"sources": [
 				{
 					"type": "archive",
-					"url": "https://www.php.net/distributions/php-7.3.7.tar.gz",
-					"sha256": "4230bbc862df712b013369de94b131eddea1e5e946a8c5e286b82d441c313328"
+					"url": "https://www.php.net/distributions/php-7.3.8.tar.gz",
+					"sha256": "31af3eff3337fb70733c9b02a3444c3dae662ecab20aeec7fdc3c42e22071490"
 				}
 			]
 		},
