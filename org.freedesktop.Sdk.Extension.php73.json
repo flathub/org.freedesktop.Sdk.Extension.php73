@@ -164,8 +164,8 @@
 			"sources": [
 				{
 					"type": "file",
-					"url": "https://github.com/composer/composer/releases/download/1.9.0/composer.phar",
-					"sha256": "1126fd7501ae6ff1dc9f91f0a3eca7430b1ea060d018d21521dc5e2d1ba01606"
+					"url": "https://getcomposer.org/download/1.9.0/composer.phar",
+					"sha256": "c9dff69d092bdec14dee64df6677e7430163509798895fbd54891c166c5c0875"
 				},
 				{
 					"type": "git",
