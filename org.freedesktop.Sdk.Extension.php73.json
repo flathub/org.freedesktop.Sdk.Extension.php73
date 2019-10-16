@@ -75,6 +75,7 @@
 				/*"--with-imap",*/
 				/*"--with-ldap",*/
 				"--with-libzip",
+				"--with-mhash",
 				"--with-mysqli",
 				"--with-openssl",
 				/*"--with-password-argon2",*/
