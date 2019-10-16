@@ -63,7 +63,7 @@
 				"--enable-zip",
 				"--with-bz2",
 				"--with-curl",
-				"--with-enchant",
+				/*"--with-enchant",*/
 				"--with-gd",
 				"--with-jpeg-dir=/usr",
 				"--with-png-dir=/usr",
@@ -71,21 +71,21 @@
 				"--with-webp-dir=/usr",
 				"--with-freetype-dir=/usr",
 				"--with-gettext",
-				"--with-gmp",
-				"--with-imap",
-				"--with-ldap",
+				/*"--with-gmp",*/
+				/*"--with-imap",*/
+				/*"--with-ldap",*/
 				"--with-libzip",
 				"--with-mysqli",
 				"--with-openssl",
-				"--with-password-argon2",
+				/*"--with-password-argon2",*/
 				"--with-pdo-mysql",
-				"--with-pdo-pgsql",
+				/*"--with-pdo-pgsql",*/
 				"--with-pspell",
 				"--with-readline",
-				"--with-recode",
-				"--with-snmp",
-				"--with-sodium",
-				"--with-tidy",
+				/*"--with-recode",*/
+				/*"--with-snmp",*/
+				/*"--with-sodium",*/
+				/*"--with-tidy",*/
 				"--with-xmlrpc",
 				"--with-xsl",
 				"--with-zlib"
