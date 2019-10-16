@@ -80,11 +80,13 @@
 				/*"--with-password-argon2",*/
 				"--with-pdo-mysql",
 				/*"--with-pdo-pgsql",*/
+				"--with-pdo-sqlite=/usr",
 				"--with-pspell",
 				"--with-readline",
 				/*"--with-recode",*/
 				/*"--with-snmp",*/
 				/*"--with-sodium",*/
+				"--with-sqlite3=/usr",
 				/*"--with-tidy",*/
 				"--with-xmlrpc",
 				"--with-xsl",
