@@ -82,7 +82,6 @@
 				"--with-snmp",
 				"--with-sodium",
 				"--with-tidy",
-				"--with-tsrm-pthreads",
 				"--with-xmlrpc",
 				"--with-xsl",
 				"--with-zlib"
