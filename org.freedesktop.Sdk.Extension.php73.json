@@ -48,7 +48,6 @@
 				"--enable-bz2",
 				"--enable-calendar",
 				"--enable-curl",
-				"--enable-dba",
 				"--enable-dba=shared",
 				"--enable-enchant",
 				"--enable-exif",
