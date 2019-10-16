@@ -45,7 +45,6 @@
 				"--with-config-file-scan-dir=${FLATPAK_DEST}/etc/php:/app/etc/php:/var/config/php/7.3/ini",
 				"--disable-cgi",
 				"--enable-bcmath",
-				"--enable-bz2",
 				"--enable-calendar",
 				"--enable-dba=shared",
 				"--enable-exif",
