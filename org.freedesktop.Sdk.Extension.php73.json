@@ -37,6 +37,21 @@
 			]
 		},
 		{
+			"name": "libsodium",
+			"buildsystem": "autotools",
+			"sources": [
+				{
+					"type": "git",
+					"url": "https://github.com/jedisct1/libsodium.git",
+					"branch": "stable",
+					"commit": "bfa866e2f043b9b1c52c3e777e76f4f743d78352"
+				}
+			],
+			"post-install": [
+				"install -Dm644 LICENSE ${FLATPAK_DEST}/share/licenses/libsodium/LICENSE"
+			]
+		},
+		{
 			"name": "php",
 			"buildsystem": "autotools",
 			"config-opts": [
@@ -86,7 +101,7 @@
 				"--with-readline",
 				/*"--with-recode",*/
 				/*"--with-snmp",*/
-				/*"--with-sodium",*/
+				"--with-sodium",
 				"--with-sqlite3=/usr",
 				/*"--with-tidy",*/
 				"--with-xmlrpc",
