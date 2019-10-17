@@ -41,6 +41,26 @@
 			]
 		},
 		{
+			"name": "libpq",
+			"buildsystem": "simple",
+			"build-commands": [
+				"./configure --prefix=/usr/lib/sdk/php73 --disable-rpath --with-openssl --without-readline",
+				"cd src/interfaces/libpq",
+				"make",
+				"make install"
+			],
+			"sources":[
+				{
+					"type": "archive",
+					"url": "https://ftp.postgresql.org/pub/source/v12.0/postgresql-12.0.tar.bz2",
+					"sha256": "cda2397215f758b793f741c86be05468257b0e6bcb1a6113882ab5d0df0855c6"
+				}
+			],
+			"post-install": [
+				"install -Dm644 COPYRIGHT ${FLATPAK_DEST}/share/licenses/libpq/LICENSE"
+			]
+		},
+		{
 			"name": "libzip",
 			"buildsystem": "cmake-ninja",
 			"config-opts": [
@@ -137,7 +157,7 @@
 				"--with-openssl",
 				"--with-password-argon2=/usr/lib/sdk/php73",
 				"--with-pdo-mysql",
-				/*"--with-pdo-pgsql",*/
+				"--with-pdo-pgsql=/usr/lib/sdk/php73",
 				"--with-pdo-sqlite=/usr",
 				"--with-pspell",
 				"--with-readline",
