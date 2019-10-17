@@ -75,6 +75,25 @@
 			]
 		},
 		{
+			"name": "libargon2",
+			"buildsystem": "simple",
+			"build-commands": [
+				"PREFIX=/usr/lib/sdk/php73 LIBRARY_REL=lib make",
+				"PREFIX=/usr/lib/sdk/php73 LIBRARY_REL=lib make install"
+			],
+			"sources": [
+				{
+					"type": "git",
+					"url": "https://github.com/P-H-C/phc-winner-argon2.git",
+					"tag": "20190702",
+					"commit": "62358ba2123abd17fccf2a108a301d4b52c01a7c"
+				}
+			],
+			"post-install": [
+				"install -Dm644 LICENSE ${FLATPAK_DEST}/share/licenses/libargon2/LICENSE"
+			]
+		},
+		{
 			"name": "php",
 			"buildsystem": "autotools",
 			"config-opts": [
@@ -116,7 +135,7 @@
 				"--with-mhash",
 				"--with-mysqli",
 				"--with-openssl",
-				/*"--with-password-argon2",*/
+				"--with-password-argon2=/usr/lib/sdk/php73",
 				"--with-pdo-mysql",
 				/*"--with-pdo-pgsql",*/
 				"--with-pdo-sqlite=/usr",
