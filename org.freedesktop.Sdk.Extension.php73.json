@@ -25,6 +25,11 @@
 		{
 			"name": "libzip",
 			"buildsystem": "cmake-ninja",
+			"config-opts": [
+				"-DBUILD_TOOLS=OFF",
+				"-DBUILD_EXAMPLES=OFF",
+				"-DBUILD_DOC=OFF"
+			],
 			"sources": [
 				{
 					"type": "archive",
