@@ -37,7 +37,10 @@
 				},
 				{
 					"type": "patch",
-					"path": "openldap-aarch64.patch"
+					"path": "openldap-aarch64.patch",
+                    "only-arches": [
+						"aarch64"
+					]
 				}
 			],
 			"post-install": [
