@@ -53,7 +53,7 @@
 			"build-commands": [
 				"./configure --prefix=${FLATPAK_DEST} --disable-rpath --with-openssl --without-readline",
 				"cd src/interfaces/libpq",
-				"make",
+				"make -j$FLATPAK_BUILDER_N_JOBS",
 				"make install"
 			],
 			"sources":[
@@ -105,7 +105,7 @@
 			"name": "libargon2",
 			"buildsystem": "simple",
 			"build-commands": [
-				"PREFIX=${FLATPAK_DEST} LIBRARY_REL=lib make",
+				"PREFIX=${FLATPAK_DEST} LIBRARY_REL=lib make -j$FLATPAK_BUILDER_N_JOBS",
 				"PREFIX=${FLATPAK_DEST} LIBRARY_REL=lib make install"
 			],
 			"sources": [
