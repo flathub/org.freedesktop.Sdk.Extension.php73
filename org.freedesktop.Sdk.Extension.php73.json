@@ -146,7 +146,6 @@
 				"--enable-zip",
 				"--with-bz2",
 				"--with-curl",
-				/*"--with-enchant",*/
 				"--with-gd",
 				"--with-jpeg-dir=/usr",
 				"--with-png-dir=/usr",
@@ -154,8 +153,6 @@
 				"--with-webp-dir=/usr",
 				"--with-freetype-dir=/usr",
 				"--with-gettext",
-				/*"--with-gmp",*/
-				/*"--with-imap",*/
 				"--with-ldap=/usr/lib/sdk/php73",
 				"--with-libzip",
 				"--with-mhash",
@@ -167,11 +164,8 @@
 				"--with-pdo-sqlite=/usr",
 				"--with-pspell",
 				"--with-readline",
-				/*"--with-recode",*/
-				/*"--with-snmp",*/
 				"--with-sodium",
 				"--with-sqlite3=/usr",
-				/*"--with-tidy",*/
 				"--with-xmlrpc",
 				"--with-xsl",
 				"--with-zlib"
