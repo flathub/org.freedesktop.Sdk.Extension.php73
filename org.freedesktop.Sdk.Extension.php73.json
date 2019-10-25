@@ -124,7 +124,6 @@
 			"buildsystem": "autotools",
 			"config-opts": [
 				"--enable-option-checking=fatal",
-				"--mandir=/usr/lib/sdk/php73/share/man",
 				"--with-config-file-scan-dir=/usr/lib/sdk/php73/etc/php:/app/etc/php:/var/config/php/7.3/ini",
 				"--disable-cgi",
 				"--enable-bcmath",
