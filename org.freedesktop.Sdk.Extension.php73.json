@@ -91,10 +91,9 @@
 			"buildsystem": "autotools",
 			"sources": [
 				{
-					"type": "git",
-					"url": "https://github.com/jedisct1/libsodium.git",
-					"branch": "stable",
-					"commit": "bfa866e2f043b9b1c52c3e777e76f4f743d78352"
+					"type": "archive",
+					"url": "https://download.libsodium.org/libsodium/releases/libsodium-1.0.18.tar.gz",
+					"sha256": "6f504490b342a4f8a4c4a02fc9b866cbef8622d5df4e5452b46be121e46636c1"
 				}
 			],
 			"post-install": [
