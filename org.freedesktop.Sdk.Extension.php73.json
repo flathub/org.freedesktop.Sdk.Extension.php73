@@ -51,7 +51,7 @@
 			"name": "libpq",
 			"buildsystem": "simple",
 			"build-commands": [
-				"./configure --prefix=/usr/lib/sdk/php73 --disable-rpath --with-openssl --without-readline",
+				"./configure --prefix=${FLATPAK_DEST} --disable-rpath --with-openssl --without-readline",
 				"cd src/interfaces/libpq",
 				"make",
 				"make install"
@@ -105,8 +105,8 @@
 			"name": "libargon2",
 			"buildsystem": "simple",
 			"build-commands": [
-				"PREFIX=/usr/lib/sdk/php73 LIBRARY_REL=lib make",
-				"PREFIX=/usr/lib/sdk/php73 LIBRARY_REL=lib make install"
+				"PREFIX=${FLATPAK_DEST} LIBRARY_REL=lib make",
+				"PREFIX=${FLATPAK_DEST} LIBRARY_REL=lib make install"
 			],
 			"sources": [
 				{
@@ -125,8 +125,8 @@
 			"buildsystem": "autotools",
 			"config-opts": [
 				"--enable-option-checking=fatal",
-				"--mandir=${FLATPAK_DEST}/share/man",
-				"--with-config-file-scan-dir=${FLATPAK_DEST}/etc/php:/app/etc/php:/var/config/php/7.3/ini",
+				"--mandir=/usr/lib/sdk/php73/share/man",
+				"--with-config-file-scan-dir=/usr/lib/sdk/php73/etc/php:/app/etc/php:/var/config/php/7.3/ini",
 				"--disable-cgi",
 				"--enable-bcmath",
 				"--enable-calendar",
