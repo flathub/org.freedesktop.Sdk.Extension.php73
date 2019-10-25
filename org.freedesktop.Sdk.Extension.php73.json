@@ -2,10 +2,10 @@
 	"id": "org.freedesktop.Sdk.Extension.php73",
 	"branch": "19.08",
 	"runtime": "org.freedesktop.Sdk",
-	"build-extension": true,
 	"sdk": "org.freedesktop.Sdk",
 	"runtime-version": "19.08",
 	"sdk-extensions": [],
+	"build-extension": true,
 	"separate-locales": false,
 	"appstream-compose": false,
 	"cleanup": [
@@ -19,6 +19,8 @@
 		"no-debuginfo": true,
 		"strip": true,
 		"prefix": "/usr/lib/sdk/php73",
+		"prepend-path": "/usr/lib/sdk/php73/bin",
+		"prepend-ld-library-path": "/usr/lib/sdk/php73/lib",
 		"append-pkg-config-path": "/usr/lib/sdk/php73/lib/pkgconfig"
 	},
 	"modules": [
@@ -232,33 +234,40 @@
 			]
 		},
 		{
- 			"name": "appdata",
-		        "buildsystem": "simple",
-		        "build-commands": [
-                		"mkdir -p ${FLATPAK_DEST}/share/appdata",
-		                "cp org.freedesktop.Sdk.Extension.php73.appdata.xml ${FLATPAK_DEST}/share/appdata",
-		                "appstream-compose --basename=org.freedesktop.Sdk.Extension.php73 --prefix=${FLATPAK_DEST} --origin=flatpak org.freedesktop.Sdk.Extension.php73"
-		        ],
-		        "sources": [
-		                {
-                			"type": "file",
-			                "path": "org.freedesktop.Sdk.Extension.php73.appdata.xml"
-		                }
-		        ]
-		},
-		{
-			"name":"scripts",
-			"buildsystem":"simple",
-			"build-commands":[
-				"install -Dm755 enable.sh ${FLATPAK_DEST}/enable.sh"
+			"name": "scripts",
+			"buildsystem": "simple",
+			"build-commands": [
+				"cp {enable,install{,-sdk}}.sh /usr/lib/sdk/php73",
+				"install -Dm0644 ${FLATPAK_ID}.appdata.xml /usr/lib/sdk/php73/share/metainfo/${FLATPAK_ID}.appdata.xml",
+				"appstream-compose --basename=${FLATPAK_ID} --prefix=${FLATPAK_DEST} --origin=flatpak ${FLATPAK_ID}"
 			],
-			"sources":[
+			"sources": [
 				{
-				    "type":"script",
-				    "commands":[
-				        "export PATH=$PATH:/usr/lib/sdk/php73/bin"
-				    ],
-				    "dest-filename":"enable.sh"
+					"type": "script",
+					"dest-filename": "install.sh",
+					"commands": [
+						"install -Dm0755 /usr/lib/sdk/php73/bin/php ${FLATPAK_DEST}/php73/bin/php",
+						"install -Dm0755 /usr/lib/sdk/php73/bin/phpdbg ${FLATPAK_DEST}/php73/bin/phpdbg",
+						"install -Dm0755 /usr/lib/sdk/php73/bin/composer ${FLATPAK_DEST}/php73/bin/composer"
+					]
+				},
+				{
+					"type": "script",
+					"dest-filename": "install-sdk.sh",
+					"commands": [
+						"cp -r /usr/lib/sdk/php73 ${FLATPAK_DEST}/php73"
+					]
+				},
+				{
+					"type": "script",
+					"dest-filename": "enable.sh",
+					"commands": [
+						"export PATH=$PATH:/usr/lib/sdk/php73/bin"
+					]
+				},
+				{
+					"type": "file",
+					"path": "org.freedesktop.Sdk.Extension.php73.appdata.xml"
 				}
 			]
 		}
