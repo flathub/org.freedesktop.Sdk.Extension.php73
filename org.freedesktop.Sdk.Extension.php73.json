@@ -26,6 +26,7 @@
 		"/bin/vacuumdb",
 		"/share/info",
 		"/share/man",
+		"/share/postgresql",
 		"/include",
 		"*.a",
 		"*.la"
