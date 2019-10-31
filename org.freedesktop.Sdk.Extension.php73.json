@@ -206,7 +206,7 @@
 				"--with-php-config=/usr/lib/sdk/php73/bin/php-config"
 			],
 			"post-install": [
-				"install -Dm755 modules/xdebug.so ${FLATPAK_DEST}/lib/php/extensions/no-debug-non-zts-20180731/xdebug.so",
+				"install -Dm755 modules/xdebug.so $(php -r 'echo ini_get(\"extension_dir\");')/xdebug.so",
 				"install -Dm644 xdebug.ini ${FLATPAK_DEST}/etc/php/xdebug.ini",
 				"install -Dm644 LICENSE ${FLATPAK_DEST}/share/licenses/xdebug/LICENSE"
 			],
