@@ -37,7 +37,10 @@
 		"prefix": "/usr/lib/sdk/php73",
 		"prepend-path": "/usr/lib/sdk/php73/bin",
 		"prepend-ld-library-path": "/usr/lib/sdk/php73/lib",
-		"append-pkg-config-path": "/usr/lib/sdk/php73/lib/pkgconfig"
+		"append-pkg-config-path": "/usr/lib/sdk/php73/lib/pkgconfig",
+		"env": {
+			"PHP_INI_DIR": "/usr/lib/sdk/php73/etc/php"
+		}
 	},
 	"modules": [
 		{
@@ -142,7 +145,8 @@
 			"buildsystem": "autotools",
 			"config-opts": [
 				"--enable-option-checking=fatal",
-				"--with-config-file-scan-dir=/usr/lib/sdk/php73/etc/php:/app/etc/php:/var/config/php/7.3/ini",
+				"--with-config-file-path=/usr/lib/sdk/php73/etc/php",
+				"--with-config-file-scan-dir=/usr/lib/sdk/php73/etc/php/conf.d:/app/etc/php:/var/config/php/7.3/ini",
 				"--disable-cgi",
 				"--enable-bcmath",
 				"--enable-calendar",
@@ -188,7 +192,7 @@
 				"--with-zlib"
 			],
 			"post-install": [
-				"install -Dm644 php.ini-development ${FLATPAK_DEST}/lib/php.ini",
+				"install -Dm644 php.ini-development ${PHP_INI_DIR}/php.ini",
 				"install -Dm644 LICENSE ${FLATPAK_DEST}/share/licenses/php/LICENSE"
 			],
 			"sources": [
@@ -207,7 +211,7 @@
 			],
 			"post-install": [
 				"install -Dm755 modules/xdebug.so $(php -r 'echo ini_get(\"extension_dir\");')/xdebug.so",
-				"install -Dm644 xdebug.ini ${FLATPAK_DEST}/etc/php/xdebug.ini",
+				"install -Dm644 xdebug.ini ${PHP_INI_DIR}/conf.d/xdebug.ini",
 				"install -Dm644 LICENSE ${FLATPAK_DEST}/share/licenses/xdebug/LICENSE"
 			],
 			"sources":[
