@@ -253,8 +253,8 @@
 			"name": "scripts",
 			"buildsystem": "simple",
 			"build-commands": [
-				"cp {enable,install{,-sdk}}.sh /usr/lib/sdk/php73",
-				"install -Dm0644 ${FLATPAK_ID}.appdata.xml /usr/lib/sdk/php73/share/metainfo/${FLATPAK_ID}.appdata.xml",
+				"cp {enable,install{,-sdk}}.sh ${FLATPAK_DEST}",
+				"install -Dm0644 ${FLATPAK_ID}.appdata.xml ${FLATPAK_DEST}/share/metainfo/${FLATPAK_ID}.appdata.xml",
 				"appstream-compose --basename=${FLATPAK_ID} --prefix=${FLATPAK_DEST} --origin=flatpak ${FLATPAK_ID}"
 			],
 			"sources": [
