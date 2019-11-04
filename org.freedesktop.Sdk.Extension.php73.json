@@ -2,15 +2,31 @@
 	"id": "org.freedesktop.Sdk.Extension.php73",
 	"branch": "19.08",
 	"runtime": "org.freedesktop.Sdk",
-	"build-extension": true,
 	"sdk": "org.freedesktop.Sdk",
 	"runtime-version": "19.08",
 	"sdk-extensions": [],
+	"build-extension": true,
 	"separate-locales": false,
 	"appstream-compose": false,
 	"cleanup": [
+		"/bin/argon2",
+		"/bin/clusterdb",
+		"/bin/createdb",
+		"/bin/createuser",
+		"/bin/dropdb",
+		"/bin/dropuser",
+		"/bin/ecpg",
+		"/bin/initdb",
+		"/bin/ldap*",
+		"/bin/pg*",
+		"/bin/postgres",
+		"/bin/postmaster",
+		"/bin/psql",
+		"/bin/reindexdb",
+		"/bin/vacuumdb",
 		"/share/info",
 		"/share/man",
+		"/share/postgresql",
 		"/include",
 		"*.a",
 		"*.la"
@@ -19,12 +35,67 @@
 		"no-debuginfo": true,
 		"strip": true,
 		"prefix": "/usr/lib/sdk/php73",
-		"append-pkg-config-path": "/usr/lib/sdk/php73/lib/pkgconfig"
+		"prepend-path": "/usr/lib/sdk/php73/bin",
+		"prepend-ld-library-path": "/usr/lib/sdk/php73/lib",
+		"append-pkg-config-path": "/usr/lib/sdk/php73/lib/pkgconfig",
+		"env": {
+			"PHP_INI_DIR": "/usr/lib/sdk/php73/etc/php"
+		}
 	},
 	"modules": [
 		{
+			"name": "libldap",
+			"buildsystem": "autotools",
+			"config-opts": [
+				"--disable-slapd",
+				"--disable-static"
+			],
+			"sources": [
+				{
+					"type": "archive",
+					"url": "https://www.openldap.org/software/download/OpenLDAP/openldap-release/openldap-2.4.48.tgz",
+					"sha256": "d9523ffcab5cd14b709fcf3cb4d04e8bc76bb8970113255f372bc74954c6074d"
+				},
+				{
+					"type": "patch",
+					"path": "openldap-aarch64.patch",
+					"only-arches": [
+						"aarch64"
+					]
+				}
+			],
+			"post-install": [
+				"install -Dm644 LICENSE ${FLATPAK_DEST}/share/licenses/libldap/LICENSE"
+			]
+		},
+		{
+			"name": "libpq",
+			"buildsystem": "simple",
+			"build-commands": [
+				"./configure --prefix=${FLATPAK_DEST} --disable-rpath --with-openssl --without-readline",
+				"cd src/interfaces/libpq",
+				"make -j$FLATPAK_BUILDER_N_JOBS",
+				"make install"
+			],
+			"sources":[
+				{
+					"type": "archive",
+					"url": "https://ftp.postgresql.org/pub/source/v12.0/postgresql-12.0.tar.bz2",
+					"sha256": "cda2397215f758b793f741c86be05468257b0e6bcb1a6113882ab5d0df0855c6"
+				}
+			],
+			"post-install": [
+				"install -Dm644 COPYRIGHT ${FLATPAK_DEST}/share/licenses/libpq/LICENSE"
+			]
+		},
+		{
 			"name": "libzip",
 			"buildsystem": "cmake-ninja",
+			"config-opts": [
+				"-DBUILD_TOOLS=OFF",
+				"-DBUILD_EXAMPLES=OFF",
+				"-DBUILD_DOC=OFF"
+			],
 			"sources": [
 				{
 					"type": "archive",
@@ -37,84 +108,91 @@
 			]
 		},
 		{
+			"name": "libsodium",
+			"buildsystem": "autotools",
+			"sources": [
+				{
+					"type": "archive",
+					"url": "https://download.libsodium.org/libsodium/releases/libsodium-1.0.18.tar.gz",
+					"sha256": "6f504490b342a4f8a4c4a02fc9b866cbef8622d5df4e5452b46be121e46636c1"
+				}
+			],
+			"post-install": [
+				"install -Dm644 LICENSE ${FLATPAK_DEST}/share/licenses/libsodium/LICENSE"
+			]
+		},
+		{
+			"name": "libargon2",
+			"buildsystem": "simple",
+			"build-commands": [
+				"PREFIX=${FLATPAK_DEST} LIBRARY_REL=lib make -j$FLATPAK_BUILDER_N_JOBS",
+				"PREFIX=${FLATPAK_DEST} LIBRARY_REL=lib make install"
+			],
+			"sources": [
+				{
+					"type": "git",
+					"url": "https://github.com/P-H-C/phc-winner-argon2.git",
+					"tag": "20190702",
+					"commit": "62358ba2123abd17fccf2a108a301d4b52c01a7c"
+				}
+			],
+			"post-install": [
+				"install -Dm644 LICENSE ${FLATPAK_DEST}/share/licenses/libargon2/LICENSE"
+			]
+		},
+		{
 			"name": "php",
 			"buildsystem": "autotools",
 			"config-opts": [
+				"--enable-option-checking=fatal",
+				"--with-config-file-path=/usr/lib/sdk/php73/etc/php",
+				"--with-config-file-scan-dir=/usr/lib/sdk/php73/etc/php/conf.d:/app/etc/php:/var/config/php/7.3/ini",
 				"--disable-cgi",
+				"--enable-bcmath",
 				"--enable-calendar",
 				"--enable-dba=shared",
-				"--enable-bcmath",
-				"--enable-bz2",
-				"--enable-ctype",
-				"--enable-curl",
-				"--enable-date",
-				"--enable-dba",
-				"--enable-dom",
-				"--enable-enchant",
 				"--enable-exif",
-				"--enable-fileinfo",
-				"--enable-filter",
 				"--enable-ftp",
-				"--enable-gd",
-				"--enable-gettext",
-				"--enable-gmp",
-				"--enable-hash",
-				"--enable-iconv",
-				"--enable-imap",
 				"--enable-intl",
-				"--enable-json",
-				"--enable-ldap",
-				"--enable-libxml",
 				"--enable-mbstring",
-				"--enable-mysqli",
-				"--enable-mysqlnd",
 				"--enable-opcache",
-				"--enable-openssl",
 				"--enable-pcntl",
-				"--enable-pcre",
-				"--enable-pdo",
-				"--enable-pdo_mysql",
-				"--enable-pdo_pgsql",
-				"--enable-pdo_sqlite",
-				"--enable-phar",
 				"--enable-phpdbg",
-				"--enable-posix",
-				"--enable-pspell",
 				"--enable-re2c-cgoto",
-				"--enable-readline",
-				"--enable-recode",
-				"--enable-reflection",
-				"--enable-session",
-				"--enable-simplexml",
-				"--enable-snmp",
 				"--enable-sockets",
-				"--enable-sodium",
-				"--enable-sqlite3",
 				"--enable-sysvmsg",
-				"--enable-sysvmem",
+				"--enable-sysvsem",
 				"--enable-sysvshm",
-				"--enable-tidy",
-				"--enable-tokenizer",
 				"--enable-wddx",
-				"--enable-xml",
-				"--enable-xmlreader",
-				"--enable-xmlrpc",
-				"--enable-xmlwriter",
-				"--enable-xsl",
 				"--enable-zip",
-				"--enable-zlib",
-				"--mandir=${FLATPAK_DEST}/share/man",
-				"--with-argon2",
-				"--with-config-file-scan-dir=${FLATPAK_DEST}/etc/php:/app/etc/php:/var/config/php/7.3/ini",
+				"--with-bz2",
 				"--with-curl",
 				"--with-gd",
+				"--with-jpeg-dir=/usr",
+				"--with-png-dir=/usr",
+				"--with-xpm-dir=/usr",
+				"--with-webp-dir=/usr",
+				"--with-freetype-dir=/usr",
+				"--with-gettext",
+				"--with-ldap=/usr/lib/sdk/php73",
 				"--with-libzip",
+				"--with-mhash",
+				"--with-mysqli",
 				"--with-openssl",
-				"--with-tsrm-pthreads",
+				"--with-password-argon2=/usr/lib/sdk/php73",
+				"--with-pdo-mysql",
+				"--with-pdo-pgsql=/usr/lib/sdk/php73",
+				"--with-pdo-sqlite=/usr",
+				"--with-pspell",
+				"--with-readline",
+				"--with-sodium",
+				"--with-sqlite3=/usr",
+				"--with-xmlrpc",
+				"--with-xsl",
 				"--with-zlib"
 			],
 			"post-install": [
-				"install -Dm644 php.ini-development ${FLATPAK_DEST}/lib/php.ini",
+				"install -Dm644 php.ini-development ${PHP_INI_DIR}/php.ini",
 				"install -Dm644 LICENSE ${FLATPAK_DEST}/share/licenses/php/LICENSE"
 			],
 			"sources": [
@@ -132,8 +210,8 @@
 				"--with-php-config=/usr/lib/sdk/php73/bin/php-config"
 			],
 			"post-install": [
-				"install -Dm755 modules/xdebug.so ${FLATPAK_DEST}/lib/php/extensions/no-debug-non-zts-20180731/xdebug.so",
-				"install -Dm644 xdebug.ini ${FLATPAK_DEST}/etc/php/xdebug.ini",
+				"install -Dm755 modules/xdebug.so $(php -r 'echo ini_get(\"extension_dir\");')/xdebug.so",
+				"install -Dm644 xdebug.ini ${PHP_INI_DIR}/conf.d/xdebug.ini",
 				"install -Dm644 LICENSE ${FLATPAK_DEST}/share/licenses/xdebug/LICENSE"
 			],
 			"sources":[
@@ -176,33 +254,40 @@
 			]
 		},
 		{
- 			"name": "appdata",
-		        "buildsystem": "simple",
-		        "build-commands": [
-                		"mkdir -p ${FLATPAK_DEST}/share/appdata",
-		                "cp org.freedesktop.Sdk.Extension.php73.appdata.xml ${FLATPAK_DEST}/share/appdata",
-		                "appstream-compose --basename=org.freedesktop.Sdk.Extension.php73 --prefix=${FLATPAK_DEST} --origin=flatpak org.freedesktop.Sdk.Extension.php73"
-		        ],
-		        "sources": [
-		                {
-                			"type": "file",
-			                "path": "org.freedesktop.Sdk.Extension.php73.appdata.xml"
-		                }
-		        ]
-		},
-		{
-			"name":"scripts",
-			"buildsystem":"simple",
-			"build-commands":[
-				"install -Dm755 enable.sh ${FLATPAK_DEST}/enable.sh"
+			"name": "scripts",
+			"buildsystem": "simple",
+			"build-commands": [
+				"cp {enable,install{,-sdk}}.sh ${FLATPAK_DEST}",
+				"install -Dm0644 ${FLATPAK_ID}.appdata.xml ${FLATPAK_DEST}/share/metainfo/${FLATPAK_ID}.appdata.xml",
+				"appstream-compose --basename=${FLATPAK_ID} --prefix=${FLATPAK_DEST} --origin=flatpak ${FLATPAK_ID}"
 			],
-			"sources":[
+			"sources": [
 				{
-				    "type":"script",
-				    "commands":[
-				        "export PATH=$PATH:/usr/lib/sdk/php73/bin"
-				    ],
-				    "dest-filename":"enable.sh"
+					"type": "script",
+					"dest-filename": "install.sh",
+					"commands": [
+						"install -Dm0755 /usr/lib/sdk/php73/bin/php ${FLATPAK_DEST}/php73/bin/php",
+						"install -Dm0755 /usr/lib/sdk/php73/bin/phpdbg ${FLATPAK_DEST}/php73/bin/phpdbg",
+						"install -Dm0755 /usr/lib/sdk/php73/bin/composer ${FLATPAK_DEST}/php73/bin/composer"
+					]
+				},
+				{
+					"type": "script",
+					"dest-filename": "install-sdk.sh",
+					"commands": [
+						"cp -r /usr/lib/sdk/php73 ${FLATPAK_DEST}/php73"
+					]
+				},
+				{
+					"type": "script",
+					"dest-filename": "enable.sh",
+					"commands": [
+						"export PATH=$PATH:/usr/lib/sdk/php73/bin"
+					]
+				},
+				{
+					"type": "file",
+					"path": "org.freedesktop.Sdk.Extension.php73.appdata.xml"
 				}
 			]
 		}
