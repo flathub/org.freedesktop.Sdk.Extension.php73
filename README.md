@@ -14,7 +14,7 @@ Example Visual Studio Code Configuration
 Includes
 
 * [php](https://php.net/) (7.3.7)
-* [composer](https://github.com/composer/composer) (1.8.6)
+* [composer](https://github.com/composer/composer) (1.9.1)
 * [xdebug](https://xdebug.org/) (2.7.2)
 
 You can use your own ini files in the config folder for each Flatpak. e.g. for Visual Studio Code
