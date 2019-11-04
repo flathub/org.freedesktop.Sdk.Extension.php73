@@ -139,8 +139,8 @@
 			"sources":[
 				{
 					"type":"archive",
-					"url":"http://xdebug.org/files/xdebug-2.7.2.tgz",
-					"sha256":"b0f3283aa185c23fcd0137c3aaa58554d330995ef7a3421e983e8d018b05a4a6"
+					"url":"https://xdebug.org/files/xdebug-2.8.0.tgz",
+					"sha256":"cb1d117ecbec7409a408cf24e59d92f7e3816fe8e2331dd0ffc3dce60228c264"
 				},
 				{
 					"type":"file",
@@ -164,13 +164,14 @@
 			"sources": [
 				{
 					"type": "file",
-					"url": "https://getcomposer.org/download/1.9.0/composer.phar",
-					"sha256": "c9dff69d092bdec14dee64df6677e7430163509798895fbd54891c166c5c0875"
+					"url": "https://getcomposer.org/download/1.9.1/composer.phar",
+					"sha256": "1f210b9037fcf82670d75892dfc44400f13fe9ada7af9e787f93e50e3b764111"
 				},
 				{
 					"type": "git",
 					"url": "https://github.com/composer/composer.git",
-					"tag": "1.9.0"
+					"tag": "1.9.1",
+					"commit": "bb01f2180df87ce7992b8331a68904f80439dd2f"
 				}
 			]
 		},
