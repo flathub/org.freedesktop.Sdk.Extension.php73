@@ -59,7 +59,7 @@
 				{
 					"type": "patch",
 					"path": "openldap-aarch64.patch",
-                    "only-arches": [
+					"only-arches": [
 						"aarch64"
 					]
 				}
