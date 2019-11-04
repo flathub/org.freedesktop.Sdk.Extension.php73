@@ -15,7 +15,7 @@ Includes
 
 * [php](https://php.net/) (7.3.7)
 * [composer](https://github.com/composer/composer) (1.9.1)
-* [xdebug](https://xdebug.org/) (2.7.2)
+* [xdebug](https://xdebug.org/) (2.8.0)
 
 You can use your own ini files in the config folder for each Flatpak. e.g. for Visual Studio Code
 `~/.var/app/com.visualstudio.code/config/php/7.3/ini` or `/var/config/php/7.3/ini` from a sandboxed shell.
