@@ -28,50 +28,61 @@ Run `. /usr/lib/sdk/php73/enable.sh` or add `/usr/lib/sdk/php73/bin` to your $PA
 #### Modules
 
 ```bash
-bash-4.4$ php -m
+bash-5.0$ php -m
 [PHP Modules]
 bcmath
+bz2
 calendar
 Core
 ctype
 curl
 date
-dba
 dom
 exif
 fileinfo
 filter
 ftp
 gd
+gettext
 hash
 iconv
 intl
 json
+ldap
 libxml
 mbstring
+mysqli
 mysqlnd
 openssl
 pcntl
 pcre
 PDO
+pdo_mysql
+pdo_pgsql
 pdo_sqlite
 Phar
 posix
+pspell
+readline
 Reflection
 session
 SimpleXML
 sockets
+sodium
 SPL
 sqlite3
 standard
 sysvmsg
+sysvsem
 sysvshm
 tokenizer
 wddx
 xdebug
 xml
 xmlreader
+xmlrpc
 xmlwriter
+xsl
 zip
 zlib
 
