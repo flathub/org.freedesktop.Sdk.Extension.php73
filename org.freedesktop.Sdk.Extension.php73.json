@@ -282,7 +282,7 @@
 					"type": "script",
 					"dest-filename": "enable.sh",
 					"commands": [
-						"export PATH=$PATH:/usr/lib/sdk/php73/bin"
+						"export PATH=$PATH:/usr/lib/sdk/php73/bin:/var/config/composer/vendor/bin"
 					]
 				},
 				{
@@ -293,3 +293,4 @@
 		}
 	]
 }
+
