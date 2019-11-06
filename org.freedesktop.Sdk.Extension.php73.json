@@ -290,6 +290,52 @@
 					"path": "org.freedesktop.Sdk.Extension.php73.appdata.xml"
 				}
 			]
+		},
+		{  
+			"name":"phpcbf",
+			"buildsystem":"simple",
+			"build-commands":[  
+						"install -Dm755 phpcbf.phar ${FLATPAK_DEST}/bin/phpcbf",
+						"install -Dm755 phpcs.phar ${FLATPAK_DEST}/bin/phpcs",
+						"install -Dm644 licence.txt ${FLATPAK_DEST}/share/licenses/phpcbf/LICENSE"
+			],
+			"sources":[
+				{
+					"type":"file",
+					"url":"https://github.com/squizlabs/PHP_CodeSniffer/releases/download/3.5.2/phpcbf.phar",
+					"sha256":"a632465994bb5e17de8722c855c539a45e6e6e1785caf644820144436afd167e"
+				},
+				{
+					"type":"file",
+					"url":"https://github.com/squizlabs/PHP_CodeSniffer/releases/download/3.5.2/phpcs.phar",
+					"sha256":"15ad1fe73b3e972f666bf4d0e9b51548d4b50f780c9cf0c64999c78c9a4e644f"
+				},
+				{
+					"type":"file",
+					"url":"https://raw.githubusercontent.com/squizlabs/PHP_CodeSniffer/3.5.2/licence.txt",
+					"sha256":"821c1697ab88bb71a5d1637743024e455d87074b8a5d0732f85205bd40cba6c9"
+				}
+			]
+		},
+		{  
+			"name":"phpcsfixer",
+			"buildsystem":"simple",
+			"build-commands":[  
+						"install -Dm755 php-cs-fixer.phar ${FLATPAK_DEST}/bin/php-cs-fixer",
+						"install -Dm644 LICENSE ${FLATPAK_DEST}/share/licenses/php-cs-fixer/LICENSE"
+			],
+			"sources":[
+				{
+					"type":"file",
+					"url":"https://github.com/FriendsOfPHP/PHP-CS-Fixer/releases/download/v2.16.0/php-cs-fixer.phar",
+					"sha256":"59a5f7fe8c6e946fdd7426c39e11d502c48549b1c79e87ddebdbf9d4c022c194"
+				},
+				{
+					"type":"file",
+					"url":"https://raw.githubusercontent.com/FriendsOfPHP/PHP-CS-Fixer/2.16/LICENSE",
+					"sha256":"eca221a3c094b573784aee474c424d2aec2f61720d53ace5ee7214c0b245a3b2"
+				}
+			]
 		}
 	]
 }
