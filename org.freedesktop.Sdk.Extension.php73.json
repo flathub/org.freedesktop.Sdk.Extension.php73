@@ -204,6 +204,35 @@
 			]
 		},
 		{
+			"name": "apcu",
+			"buildsystem": "autotools",
+			"config-opts": [
+				"--with-php-config=/usr/lib/sdk/php73/bin/php-config"
+			],
+			"post-install": [
+				"install -Dm755 modules/apcu.so $(php -r 'echo ini_get(\"extension_dir\");')/apcu.so",
+				"install -Dm644 apcu.ini ${PHP_INI_DIR}/conf.d/apcu.ini",
+				"install -Dm644 LICENSE ${FLATPAK_DEST}/share/licenses/apcu/LICENSE"
+			],
+			"sources": [
+				{
+					"type": "archive",
+					"url": "https://github.com/krakjoe/apcu/archive/v5.1.18.tar.gz",
+					"sha256": "0ffae84b607bf3bfb87a0ab756b7712a93c3de2be20177b94ebf845c3d94f117"
+				},
+				{
+					"type":"file",
+					"path":"apcu.ini"
+				},
+				{
+					"type": "shell",
+					"commands": [
+						"${FLATPAK_DEST}/bin/phpize"
+					]
+				}
+			]
+		},
+		{
 			"name":"xdebug",
 			"buildsystem":"autotools",
 			"config-opts": [
@@ -282,7 +311,7 @@
 					"type": "script",
 					"dest-filename": "enable.sh",
 					"commands": [
-						"export PATH=$PATH:/usr/lib/sdk/php73/bin"
+						"export PATH=$PATH:/usr/lib/sdk/php73/bin:/var/config/composer/vendor/bin"
 					]
 				},
 				{
@@ -293,3 +322,4 @@
 		}
 	]
 }
+
