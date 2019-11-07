@@ -15,6 +15,7 @@ Includes
 
 * [php](https://php.net/) (7.3.11)
 * [composer](https://github.com/composer/composer) (1.9.1)
+* [apcu](https://pecl.php.net/package/APCu) (5.1.18)
 * [xdebug](https://xdebug.org/) (2.8.0)
 
 Each Flatpak can have its own custom php configuration files.
@@ -33,6 +34,7 @@ Run `. /usr/lib/sdk/php73/enable.sh` or add `/usr/lib/sdk/php73/bin` to your $PA
 ```bash
 bash-5.0$ php -m
 [PHP Modules]
+apcu
 bcmath
 bz2
 calendar
