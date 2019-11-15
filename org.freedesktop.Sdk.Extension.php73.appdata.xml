@@ -9,7 +9,7 @@
   <update_contact>matthew@stobbs.ca</update_contact>
   <description>
     <p>
-      This SDK extension gives access to php 7.3 as well as php composer.
+      This SDK extension allows you to build PHP 7.3 based applications, with built-in Composer support.
     </p>
   </description>
 </component>
