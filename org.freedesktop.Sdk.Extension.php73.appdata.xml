@@ -12,4 +12,7 @@
       This SDK extension allows you to build PHP 7.3 based applications, with built-in Composer support.
     </p>
   </description>
+  <releases>
+    <release version="7.3.21" date="2020-08-06" />
+  </releases>
 </component>
