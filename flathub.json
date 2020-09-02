@@ -1,0 +1,4 @@
+{
+    "skip-icons-check": true,
+    "end-of-life": "This version of the PHP SDK is no longer mantained, please update to 19.08"
+}
