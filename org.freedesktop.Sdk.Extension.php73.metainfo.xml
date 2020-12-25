@@ -1,10 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<component type="runtime">
+<component type="addon">
   <id>org.freedesktop.Sdk.Extension.php73</id>
+  <extends>org.freedesktop.Sdk</extends>
   <metadata_license>CC0-1.0</metadata_license>
   <project_license>PHP-3.0 AND BSD-3-Clause AND MIT</project_license>
-  <name>PHP 7.3 SDK extension</name>
-  <summary>PHP 7.3 SDK extension</summary>
+  <name>PHP 7.3</name>
+  <summary>PHP 7.3 extension for the flatpak Freedesktop SDK</summary>
   <url type="homepage">https://php.net</url>
   <update_contact>matthew@stobbs.ca</update_contact>
   <description>
@@ -13,6 +14,7 @@
     </p>
   </description>
   <releases>
+    <release version="7.3.25" date="2020-12-23" />
     <release version="7.3.22" date="2020-09-03" />
     <release version="7.3.21" date="2020-08-06" />
   </releases>
