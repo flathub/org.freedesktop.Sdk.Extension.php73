@@ -224,8 +224,8 @@
             "sources": [
                 {
                     "type": "archive",
-                    "url": "https://www.php.net/distributions/php-7.3.27.tar.xz",
-                    "sha256": "65f616e2d5b6faacedf62830fa047951b0136d5da34ae59e6744cbaf5dca148d",
+                    "url": "https://www.php.net/distributions/php-7.3.28.tar.xz",
+                    "sha256": "a2a84dbec8c1eee3f46c5f249eaaa2ecb3f9e7a6f5d0604d2df44ff8d4904dbe",
                     "x-checker-data": {
                         "type": "json",
                         "url": "https://www.php.net/releases/index.php?json&version=7.3&max=1",
