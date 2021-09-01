@@ -233,6 +233,16 @@
                         "url-query": "\"https://www.php.net/distributions/php-\" + $version + \".tar.xz\"",
                         "is-main-source": true
                     }
+                },
+                {
+                    "type": "patch",
+                    "path": "patches/php/freetype.patch"
+                },
+                {
+                    "type": "shell",
+                    "commands": [
+                        "./buildconf --force"
+                    ]
                 }
             ]
         },
