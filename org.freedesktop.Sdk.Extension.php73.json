@@ -37,7 +37,7 @@
         "prefix": "/usr/lib/sdk/php73",
         "prepend-path": "/usr/lib/sdk/php73/bin",
         "prepend-ld-library-path": "/usr/lib/sdk/php73/lib",
-        "append-pkg-config-path": "/usr/lib/sdk/php73/lib/pkgconfig",
+        "prepend-pkg-config-path": "/usr/lib/sdk/php73/lib/pkgconfig",
         "env": {
             "PHP_INI_DIR": "/usr/lib/sdk/php73/etc/php"
         }
@@ -133,6 +133,36 @@
             ]
         },
         {
+            "name": "openssl",
+            "config-opts": [
+                "enable-ec_nistp_64_gcc_128",
+                "--prefix=/usr/lib/sdk/php73",
+                "--openssldir=/usr/lib/sdk/php73/etc/pki/tls",
+                "shared",
+                "threads"
+            ],
+            "cleanup": [
+                "/bin",
+                "/share/doc"
+            ],
+            "sources": [
+                {
+                    "type": "archive",
+                    "url": "https://www.openssl.org/source/openssl-1.1.1s.tar.gz",
+                    "sha256": "c5ac01e760ee6ff0dab61d6b2bbd30146724d063eb322180c6f18a6f74e4b6aa"
+                },
+                {
+                    "type": "shell",
+                    "commands": [
+                        "cp config configure"
+                    ]
+                }
+            ],
+            "post-install": [
+                "install -Dm644 LICENSE ${FLATPAK_DEST}/share/licenses/openssl/LICENSE"
+            ]
+        },
+        {
             "name": "php",
             "buildsystem": "autotools",
             "build-options": {
@@ -184,7 +214,7 @@
                 "--with-libzip",
                 "--with-mhash",
                 "--with-mysqli",
-                "--with-openssl",
+                "--with-openssl-dir=/usr/lib/sdk/php73",
                 "--with-password-argon2=/usr/lib/sdk/php73",
                 "--with-pdo-mysql",
                 "--with-pdo-pgsql=/usr/lib/sdk/php73",
@@ -210,6 +240,10 @@
                 {
                     "type": "patch",
                     "path": "patches/php/freetype.patch"
+                },
+                {
+                    "type": "patch",
+                    "path": "patches/php/support-icu-70.1.patch"
                 },
                 {
                     "type": "shell",
