@@ -286,8 +286,8 @@
             "sources": [
                 {
                     "type": "file",
-                    "url": "https://getcomposer.org/download/2.4.1/composer.phar",
-                    "sha256": "ea8cf6308ec76ff9645c3818841a7588096b9dc2767345fbd4bd492dd8a6dca6",
+                    "url": "https://getcomposer.org/download/2.8.4/composer.phar",
+                    "sha256": "c4c4e2e1beab0ea04e0bd042a5dbba9feda1fbf5eda0d36203958edd343c0a8a",
                     "x-checker-data": {
                         "type": "anitya",
                         "project-id": 9710,
